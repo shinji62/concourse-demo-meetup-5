@@ -1,0 +1,23 @@
+hash: 2bebc3fa873a0f28da63d2c42f24ccbb9cea481e3c341b4d84d24829ef0cabe6
+updated: 2017-03-07T20:47:38.035929158+09:00
+imports:
+- name: github.com/alecthomas/template
+  version: a0175ee3bccc567396460bf5acd36800cb10c49c
+  subpackages:
+  - parse
+- name: github.com/alecthomas/units
+  version: 2efee857e7cfd4f3d0138cc3cbb1b4966962b93a
+- name: github.com/go-sql-driver/mysql
+  version: 2e00b5cd70399450106cec6431c2e2ce3cae5034
+- name: github.com/mattes/migrate
+  version: 305a63a4472b883b8af8e0d71132e98d83a69e4d
+  subpackages:
+  - driver/mysql
+  - migrate
+  - driver
+  - file
+  - migrate/direction
+  - pipe
+- name: gopkg.in/alecthomas/kingpin.v2
+  version: e9044be3ab2a8e11d4e1f418d12f0790d57e8d70
+devImports: []

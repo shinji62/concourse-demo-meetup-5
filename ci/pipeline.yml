@@ -1,0 +1,26 @@
+resources:
+- name: concourse-demo-meetup-5
+  type: git
+  source:
+    uri: git@github.com:cloudfoundry-community/firehose-to-syslog.git
+    branch: master
+    private_key: {{private-key-github-concourse}}
+
+
+
+
+
+
+jobs:
+
+- name: testing-with-mysql
+  public: true
+  serial: true
+  plan:
+  - aggregate:
+    - get: source-repos
+      resource:
+    - get: mysql-image
+    - get: alpine-golang-bash
+  - task:
+    file:
