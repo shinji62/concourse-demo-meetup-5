@@ -4,14 +4,10 @@ platform: linux
 image_resource:
   type: docker-image
   source: {repository: "mumoshu/dcind", tag: "latest"}
-
-
 inputs:
 - name: source-repos
 - name: mysql-image
 - name: alpine-golang-bash
-
-
 run:
   path: sh
   args:
@@ -19,11 +15,15 @@ run:
     - |
       source /docker-lib.sh  2>/dev/null
       start_docker
-      docker-compose version
       docker load -q --input ./mysql-image/image
       docker load -q --input ./alpine-golang-bash/image
+      docker tag "$(cat "./mysql-image/image-id")" "$(cat "./mysql-image/repository"):$(cat "./mysql-image/tag")"
+      docker tag "$(cat "./alpine-golang-bash/image-id")" "$(cat "./alpine-golang-bash/repository"):$(cat "./alpine-golang-bash/tag")"
       docker images
       cd ./source-repos/
       docker-compose -f ./ci/testing/docker-compose.yml run app
       TEST_RESULTS=$?
+      docker-compose -f ./ci/testing/docker-compose.yml stop
+      docker-compose -f ./ci/testing/docker-compose.yml rm -a -f -v
+      stop_docker
       exit ${TEST_RESULTS}

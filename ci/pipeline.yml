@@ -16,7 +16,7 @@ resources:
   type: docker-image
   source:
     repository: mysql
-    tag: 5.6
+    tag: "5.6"
 
 
 
@@ -35,5 +35,6 @@ jobs:
       params: {save: true}
     - get: alpine-golang-bash
       params: {save: true}
-  - task: Run-testing
+  - task: run-testing
+    privileged: true
     file: source-repos/ci/testing/testing.yml

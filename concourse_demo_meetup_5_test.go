@@ -14,14 +14,12 @@ import (
 var dsnTest string
 
 var _ = BeforeSuite(func() {
-	addr := os.Getenv("MYSQL_PORT_3306_TCP_ADDR")
-	port := os.Getenv("MYSQL_PORT_3306_TCP_PORT")
-	password := os.Getenv("MYSQL_ENV_MYSQL_ROOT_PASSWORD")
-	fmt.Println(os.Getenv("MYSQL_PORT_3306_TCP_ADDR"))
-	if addr == "" {
+	password := os.Getenv("MYSQL_ROOT_PASSWORD")
+	database := os.Getenv("MYSQL_DATABASE")
+	if database == "" {
 		dsnTest = "root:root@tcp(localhost:3306)/meetup"
 	} else {
-		dsnTest = fmt.Sprintf("root:%s@tcp(%s:%s)/meetup", password, addr, port)
+		dsnTest = fmt.Sprintf("root:%s@tcp(db:3306)/%s", password, database)
 	}
 
 	Migrate("mysql://" + dsnTest)
