@@ -8,6 +8,8 @@ image_resource:
 
 inputs:
 - name: source-repos
+- name: mysql-image
+- name: alpine-golang-bash
 
 
 run:
@@ -17,8 +19,10 @@ run:
     - |
       source /docker-lib.sh  2>/dev/null
       start_docker
-      docker info
       docker-compose version
+      docker load -q --input ./mysql-image/image
+      docker load -q --input ./alpine-golang-bash/image
+      docker images
       cd ./source-repos/
       docker-compose -f ./ci/testing/docker-compose.yml run app
       TEST_RESULTS=$?
