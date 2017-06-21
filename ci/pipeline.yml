@@ -2,7 +2,8 @@ resources:
 - name: concourse-demo-meetup-5
   type: git
   source:
-    uri: git@github.com:shinji62/concourse-demo-meetup-5.git
+ #   uri: git@github.com:shinji62/concourse-demo-meetup-5.git
+    uri: https://github.com/shinji62/concourse-demo-meetup-5.git
     branch: master
     private_key: {{private-key-github-concourse}}
 

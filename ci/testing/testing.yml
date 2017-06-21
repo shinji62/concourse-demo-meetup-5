@@ -13,6 +13,8 @@ run:
   args:
     - -c
     - |
+      # aufs hack
+      sed -i 's~daemon ${server_args}~daemon ${server_args} --graph=/scratch/docker~g' /docker-lib.sh
       source /docker-lib.sh  2>/dev/null
       start_docker
       docker load -q --input ./mysql-image/image
